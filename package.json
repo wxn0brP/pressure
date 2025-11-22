@@ -1,0 +1,30 @@
+{
+	"name": "pressure",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"description": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wxn0brP/pressure.git"
+	},
+	"homepage": "https://github.com/wxn0brP/pressure",
+	"author": "wxn0brP",
+	"license": "MIT",
+	"type": "module",
+	"bin": {
+		"pressure": "./src/index.ts"
+	},
+	"scripts": {
+		"start": "bun run src/index.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "*",
+		"typescript": "*"
+	},
+	"dependencies": {
+		"@wxn0brp/falcon-frame": "^0.5.3",
+		"esbuild": "^0.27.0",
+		"esbuild-style-plugin": "^1.6.3",
+		"sass": "^1.94.2"
+	}
+}

@@ -40,8 +40,7 @@ const { values } = parseArgs({
             short: "i"
         },
         hp: {
-            type: "string",
-            default: "public:dist"
+            type: "string"
         },
         assets: {
             type: "string",

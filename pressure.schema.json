@@ -1,0 +1,52 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://github.com/wxn0brP/pressure/pressure.schema.json",
+	"title": "Pressure Configuration",
+	"description": "Configuration schema for pressure static site bundler",
+	"type": "object",
+	"properties": {
+		"dir": {
+			"type": "string",
+			"description": "The output directory for the bundled files",
+			"default": "dist"
+		},
+		"entryPoints": {
+			"type": "array",
+			"description": "An array of entry points for esbuild",
+			"items": {
+				"type": "string"
+			},
+			"default": ["src/index.ts"]
+		},
+		"external": {
+			"type": "array",
+			"description": "An array of packages to be treated as external",
+			"items": {
+				"type": "string"
+			},
+			"default": []
+		},
+		"html": {
+			"type": "array",
+			"description": "An array of HTML files to process",
+			"items": {
+				"type": "string"
+			},
+			"default": ["public/index.html"]
+		},
+		"htmlPath": {
+			"type": "string",
+			"description": "Path mapping for HTML files, e.g., \"public:dist\"",
+			"default": "public:dist"
+		},
+		"assets": {
+			"type": "array",
+			"description": "An array of asset directories to copy",
+			"items": {
+				"type": "string"
+			},
+			"default": []
+		}
+	},
+	"additionalProperties": false
+}

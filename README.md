@@ -80,3 +80,20 @@ Example `pressure.json`:
 
 `pressure/html.ts` or `pressure/html.json` can be used to configure the HTML data.
 `pressure/vars.json` can be used to configure falcon frame variables (eg layout).
+
+## VSC json schema
+
+```json
+"json.schemas": [
+    {
+        "fileMatch": [
+            "pressure.json"
+        ],
+        "url": "https://raw.githubusercontent.com/wxn0brP/pressure/refs/heads/master/pressure.schema.json"
+    }
+],
+```
+
+## License
+
+MIT License

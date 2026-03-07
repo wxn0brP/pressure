@@ -75,3 +75,8 @@ Example `pressure.json`:
 | `--assets <dirs>`   | `-a <dirs>`  | Sets asset directories to copy (comma-separated). |
 | `--help`            | `-h`         | Displays the help message.                        |
 | `--version`         | `-v`         | Displays the version number.                      |
+
+### Additional Files
+
+`pressure/html.ts` or `pressure/html.json` can be used to configure the HTML data.
+`pressure/vars.json` can be used to configure falcon frame variables (eg layout).

@@ -22,7 +22,7 @@
         "typescript": "^5"
     },
     "dependencies": {
-        "@wxn0brp/falcon-frame": "^0.7.1",
+        "@wxn0brp/falcon-frame": "^0.8.0",
         "esbuild": "^0.27.3",
         "esbuild-style-plugin": "^1.6.3",
         "sass": "^1.97.3"

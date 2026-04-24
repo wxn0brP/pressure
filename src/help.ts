@@ -10,7 +10,9 @@ Options:
     -s, --entry       Entry points
     -e, --external    External dependencies
     -i, --html        HTML files
+    --hp              HTML output path
     -a, --assets      Assets
+    --workflow        Write dir to file for workflow
 `;
 
 console.log(help.trim());

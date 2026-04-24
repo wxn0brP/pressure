@@ -1,0 +1,59 @@
+name: "pressure"
+description: "Bundle web apps"
+author: "wxn0brP"
+
+branding:
+  icon: "package"
+  color: "orange"
+
+inputs:
+  args:
+    description: "Arguments"
+    required: false
+    default: ""
+  upload:
+    description: "Upload to GitHub Pages"
+    required: false
+    default: "true"
+
+outputs:
+  output-dir:
+    description: "The output directory"
+    value: ${{ steps.build.outputs.dir }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Setup bun
+      uses: oven-sh/setup-bun@latest
+
+    - name: Setup Workflow
+      shell: bash
+      run: |
+        cd $GITHUB_ACTION_PATH
+        bun install
+
+    - name: Install dependencies
+      if: hashFiles('package.json') != ''
+      shell: bash
+      run: bun install
+
+    - id: build
+      name: Build
+      shell: bash
+      run: |
+        ARGS=${{ inputs.args }}
+        bun run $GITHUB_ACTION_PATH/src/index.ts $ARGS --workflow
+        echo "output-dir=$(cat ./pressure-out-dir.log)" >> $GITHUB_OUTPUT
+        rm ./pressure-out-dir.log
+
+    - id: upload
+      name: Upload
+      if: inputs.upload == 'true'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ steps.build.outputs.dir }}

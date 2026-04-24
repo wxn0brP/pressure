@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
 
 export interface Config {
@@ -45,6 +45,10 @@ const { values } = parseArgs({
         assets: {
             type: "string",
             short: "a"
+        },
+        workflow: {
+            type: "boolean",
+            default: false
         }
     },
     allowPositionals: true,
@@ -78,3 +82,6 @@ if (values.entry) config.entryPoints = values.entry.split(",").filter(Boolean);
 if (values.external) config.external = values.external.split(",").filter(Boolean);
 if (values.html) config.html = values.html.split(",").filter(Boolean);
 if (values.assets) config.assets = values.assets.split(",").filter(Boolean);
+
+if (values.workflow)
+    writeFileSync("pressure-out-dir.log", config.dir);

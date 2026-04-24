@@ -6,6 +6,9 @@ export async function copyAssets(config: Config) {
     if (!assets.length) return console.log("[PRESSURE] No assets found");
 
     for (const file of assets) {
-        await $`cp ${file} dist`;
+        if (process.platform === "win32")
+            await $`copy ${file} dist`;
+        else
+            await $`cp ${file} dist`;
     }
 }

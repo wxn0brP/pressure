@@ -14,6 +14,12 @@ Get [ingr](https://github.com/wxn0brP/dotfiles) and run:
 ingr pressure
 ```
 
+Or run:
+
+```bash
+bunx @wxn0brp/ing i pressure
+```
+
 ## Basic Usage
 
 ```bash

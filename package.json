@@ -1,6 +1,6 @@
 {
     "name": "pressure",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "src/index.ts",
     "description": "",
     "repository": {
@@ -19,12 +19,12 @@
     },
     "devDependencies": {
         "@types/bun": "*",
-        "typescript": "^5"
+        "typescript": "^6"
     },
     "dependencies": {
-        "@wxn0brp/falcon-frame": "^0.7.1",
-        "esbuild": "^0.27.3",
+        "@wxn0brp/falcon-frame": "^0.8.1",
+        "esbuild": "^0.28",
         "esbuild-style-plugin": "^1.6.3",
-        "sass": "^1.97.3"
+        "sass": "^1.99.0"
     }
 }

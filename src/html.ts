@@ -1,8 +1,6 @@
-import FalconFrame, { renderHTML } from "@wxn0brp/falcon-frame";
+import { renderHTML } from "@wxn0brp/falcon-frame";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { Config } from "./opts";
-
-const ff = new FalconFrame();
 
 export async function buildHTML(config: Config) {
     const {
@@ -11,24 +9,26 @@ export async function buildHTML(config: Config) {
     } = config;
     if (!files.length) return console.log("[PRESSURE] No HTML files found");
 
+    let FFVar: Record<string, any> = {};
     const [from, to] = htmlPath.split(":");
 
-    let htmlVars: Record<string, any> = {};
+    let data: Record<string, any> = {};
 
     if (existsSync("pressure/html.json"))
-        Object.assign(htmlVars, JSON.parse(readFileSync("pressure/html.json", "utf-8")));
+        Object.assign(data, JSON.parse(readFileSync("pressure/html.json", "utf-8")));
 
     if (existsSync("pressure/html.ts"))
-        Object.assign(htmlVars, await import(process.cwd() + "/pressure/html"));
+        Object.assign(data, await import(process.cwd() + "/pressure/html"));
 
-    if (existsSync("pressure/vars.json")) {
-        const ffVars: Record<string, any> = JSON.parse(readFileSync("pressure/vars.json", "utf-8"));
-        for (const [key, value] of Object.entries(ffVars))
-            ff.setVar(key as any, value as any);
-    }
+    if (existsSync("pressure/vars.json"))
+        FFVar = JSON.parse(readFileSync("pressure/vars.json", "utf-8"));
 
     for (const file of files) {
-        const html = renderHTML(file, htmlVars, [], ff);
+        const html = renderHTML({
+            templatePath: file,
+            data,
+            FFVar,
+        });
         const path = file.replace(from, to);
         writeFileSync(path, html);
     }

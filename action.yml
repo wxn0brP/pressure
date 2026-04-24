@@ -38,8 +38,10 @@ runs:
     - name: Checkout
       uses: actions/checkout@v6
 
-    - name: Setup bun
-      uses: oven-sh/setup-bun@latest
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
 
     - name: Setup Workflow
       shell: bash

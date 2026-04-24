@@ -81,4 +81,4 @@ runs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
-        publish_dir: ${{ steps.build.outputs.dir }}
+        publish_dir: ${{ steps.build.outputs.output-dir }}

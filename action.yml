@@ -23,6 +23,9 @@ inputs:
     description: "Command to run after building"
     required: false
     default: ""
+  GITHUB_TOKEN:
+    description: "GitHub token"
+    required: false
 
 outputs:
   output-dir:
@@ -75,5 +78,5 @@ runs:
       if: inputs.upload == 'true'
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ inputs.GITHUB_TOKEN }}
         publish_dir: ${{ steps.build.outputs.dir }}

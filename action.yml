@@ -15,6 +15,14 @@ inputs:
     description: "Upload to GitHub Pages"
     required: false
     default: "true"
+  pre:
+    description: "Command to run before building"
+    required: false
+    default: ""
+  post:
+    description: "Command to run after building"
+    required: false
+    default: ""
 
 outputs:
   output-dir:
@@ -41,6 +49,12 @@ runs:
       shell: bash
       run: bun install
 
+    - name: Run pre
+      id: pre
+      if: inputs.pre != ''
+      shell: bash
+      run: ${{ inputs.pre }}
+
     - id: build
       name: Build
       shell: bash
@@ -49,6 +63,12 @@ runs:
         bun run $GITHUB_ACTION_PATH/src/index.ts $ARGS --workflow
         echo "output-dir=$(cat ./pressure-out-dir.log)" >> $GITHUB_OUTPUT
         rm ./pressure-out-dir.log
+
+    - name: Run post
+      id: post
+      if: inputs.post != ''
+      shell: bash
+      run: ${{ inputs.post }}
 
     - id: upload
       name: Upload

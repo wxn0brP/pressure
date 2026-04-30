@@ -8,4 +8,6 @@ export async function copyAssets(config: Config) {
     for (const file of assets) {
         await $`${process.platform === "win32" ? "copy" : "cp"} ${file} ${config.dir}`;
     }
+
+    console.log("[PRESSURE] Assets copied", assets);
 }

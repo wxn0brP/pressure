@@ -31,4 +31,6 @@ export async function buildCode(config: Config) {
             })
         ],
     });
+
+    console.log("[PRESSURE] entryPoints built", entryPoints);
 }

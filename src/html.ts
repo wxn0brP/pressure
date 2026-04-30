@@ -32,4 +32,6 @@ export async function buildHTML(config: Config) {
         const path = file.replace(from, to);
         writeFileSync(path, html);
     }
+
+    console.log("[PRESSURE] HTML Build Done", files);
 }

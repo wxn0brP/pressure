@@ -19,7 +19,7 @@ export async function buildCode(config: Config) {
         sourcemap: true,
         external,
         splitting: true,
-        minify: true,
+        minify: process.env.PRESSURE_MINIFY !== "false",
         plugins: [
             stylePlugin({
                 renderOptions: {

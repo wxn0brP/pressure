@@ -17,7 +17,7 @@ await buildHTML(config);
 
 if (config.singleFile && metafile) {
 	const filesToDelete = Object.keys(metafile.outputs).filter(
-		f => f.endsWith(".js") || f.endsWith(".css"),
+		f => f.endsWith(".js") || f.endsWith(".css") || f.endsWith(".map"),
 	);
 	for (const file of filesToDelete) {
 		if (existsSync(file)) rmSync(file);

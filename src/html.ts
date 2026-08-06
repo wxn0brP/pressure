@@ -9,7 +9,7 @@ export async function buildHTML(config: Config) {
 	let FFVar: Record<string, any> = {};
 	const [from, to] = htmlPath.split(":");
 
-	let data: Record<string, any> = {};
+	const data: Record<string, any> = {};
 
 	if (existsSync("pressure/html.json"))
 		Object.assign(

@@ -3,7 +3,7 @@ import stylePlugin from "esbuild-style-plugin";
 import { Config } from "./opts";
 
 export async function buildCode(config: Config) {
-	const { entryPoints, dir, external, singleFile } = config;
+	const { entryPoints, dir, external, singleFile, minify } = config;
 	if (!entryPoints.length)
 		return console.log("[PRESSURE] No entryPoints found");
 
@@ -16,7 +16,7 @@ export async function buildCode(config: Config) {
 		sourcemap: true,
 		external,
 		splitting: !singleFile,
-		minify: process.env.PRESSURE_MINIFY !== "false",
+		minify,
 		metafile: true,
 		plugins: [
 			stylePlugin({

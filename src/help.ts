@@ -14,6 +14,7 @@ Options:
     -a, --assets      Assets
     --workflow        Write dir to file for workflow
     --single-file     Bundle everything into a single HTML file
+    --no-minify       Disable minification
 `;
 
 console.log(help.trim());

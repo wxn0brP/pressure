@@ -69,6 +69,7 @@ Example `pressure.json`:
 | `htmlPath`    | `string`   | Path mapping for HTML files, e.g., `"public:dist"`. | `"public:dist"`         |
 | `assets`      | `string[]` | An array of asset directories to copy.              | `[]`                    |
 | `singleFile`  | `boolean`  | Bundle everything into a single HTML file.          | `false`                 |
+| `minify`      | `boolean`  | Enable or disable minification of the output.       | `true`                  |
 
 ### Command-Line Arguments
 
@@ -81,6 +82,7 @@ Example `pressure.json`:
 | `--hp <path>`       |              | Sets the HTML path mapping (`source:dest`).       |
 | `--assets <dirs>`   | `-a <dirs>`  | Sets asset directories to copy (comma-separated). |
 | `--single-file`     |              | Bundles everything into a single HTML file.       |
+| `--no-minify`       |              | Disables minification of the output.              |
 | `--help`            | `-h`         | Displays the help message.                        |
 | `--version`         | `-v`         | Displays the version number.                      |
 

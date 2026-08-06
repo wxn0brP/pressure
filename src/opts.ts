@@ -9,6 +9,7 @@ export interface Config {
 	htmlPath?: string;
 	assets?: string[];
 	singleFile?: boolean;
+	minify?: boolean;
 }
 
 const { values } = parseArgs({
@@ -55,6 +56,10 @@ const { values } = parseArgs({
 			type: "boolean",
 			default: false,
 		},
+		"no-minify": {
+			type: "boolean",
+			default: false,
+		},
 	},
 	allowPositionals: true,
 	allowNegatives: true,
@@ -87,6 +92,11 @@ export const config: Config = {
 	htmlPath: values.hp || configFile.htmlPath || "public:dist",
 	assets: configFile.assets || [],
 	singleFile: values["single-file"] || configFile.singleFile || false,
+	minify: values["no-minify"]
+		? false
+		: configFile.minify !== undefined
+			? configFile.minify
+			: true,
 };
 
 if (values.entry) config.entryPoints = values.entry.split(",").filter(Boolean);

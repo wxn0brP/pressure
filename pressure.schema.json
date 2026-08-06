@@ -51,6 +51,11 @@
 			"type": "boolean",
 			"description": "Bundle everything into a single HTML file with inline JS and CSS",
 			"default": false
+		},
+		"minify": {
+			"type": "boolean",
+			"description": "Enable or disable minification of the output",
+			"default": true
 		}
 	},
 	"additionalProperties": false

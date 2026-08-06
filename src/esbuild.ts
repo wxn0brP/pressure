@@ -3,37 +3,35 @@ import stylePlugin from "esbuild-style-plugin";
 import { Config } from "./opts";
 
 export async function buildCode(config: Config) {
-    const {
-        entryPoints,
-        dir,
-        external,
-        singleFile,
-    } = config;
-    if (!entryPoints.length) return console.log("[PRESSURE] No entryPoints found");
+	const { entryPoints, dir, external, singleFile } = config;
+	if (!entryPoints.length)
+		return console.log("[PRESSURE] No entryPoints found");
 
-    const result = await esbuild.build({
-        entryPoints,
-        outdir: dir,
-        format: "esm",
-        target: "es2022",
-        bundle: true,
-        sourcemap: true,
-        external,
-        splitting: !singleFile,
-        minify: process.env.PRESSURE_MINIFY !== "false",
-        metafile: true,
-        plugins: [
-            stylePlugin({
-                renderOptions: {
-                    sassOptions: {
-                        silenceDeprecations: ["legacy-js-api"],
-                        style: "compressed"
-                    }
-                }
-            })
-        ],
-    });
+	const result = await esbuild.build({
+		entryPoints,
+		outdir: dir,
+		format: "esm",
+		target: "es2022",
+		bundle: true,
+		sourcemap: true,
+		external,
+		splitting: !singleFile,
+		minify: process.env.PRESSURE_MINIFY !== "false",
+		metafile: true,
+		plugins: [
+			stylePlugin({
+				renderOptions: {
+					sassOptions: {
+						silenceDeprecations: [
+							"legacy-js-api",
+						],
+						style: "compressed",
+					},
+				},
+			}),
+		],
+	});
 
-    console.log("[PRESSURE] entryPoints built", entryPoints);
-    return result.metafile;
+	console.log("[PRESSURE] entryPoints built", entryPoints);
+	return result.metafile;
 }

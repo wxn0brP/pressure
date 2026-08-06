@@ -7,27 +7,30 @@ import { buildHTML } from "./html";
 import { config } from "./opts";
 
 if (!existsSync(config.dir))
-    mkdirSync(config.dir, { recursive: true });
+	mkdirSync(config.dir, {
+		recursive: true,
+	});
 
 const metafile = await buildCode(config);
 await copyAssets(config);
 await buildHTML(config);
 
 if (config.singleFile && metafile) {
-    const filesToDelete = Object.keys(metafile.outputs).filter(
-        f => f.endsWith(".js") || f.endsWith(".css")
-    );
-    for (const file of filesToDelete) {
-        if (existsSync(file)) rmSync(file);
-    }
-    const copiedAssets = config.assets?.map(a => {
-        const name = a.split("/").pop();
-        return `${config.dir}/${name}`;
-    }) || [];
-    for (const file of copiedAssets) {
-        if (existsSync(file)) rmSync(file);
-    }
-    console.log("[PRESSURE] Cleaned up separate JS/CSS files");
+	const filesToDelete = Object.keys(metafile.outputs).filter(
+		f => f.endsWith(".js") || f.endsWith(".css"),
+	);
+	for (const file of filesToDelete) {
+		if (existsSync(file)) rmSync(file);
+	}
+	const copiedAssets =
+		config.assets?.map(a => {
+			const name = a.split("/").pop();
+			return `${config.dir}/${name}`;
+		}) || [];
+	for (const file of copiedAssets) {
+		if (existsSync(file)) rmSync(file);
+	}
+	console.log("[PRESSURE] Cleaned up separate JS/CSS files");
 }
 
 console.log("[PRESSURE] Build Done");

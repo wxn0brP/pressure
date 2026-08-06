@@ -2,12 +2,12 @@ import { $ } from "bun";
 import { Config } from "./opts";
 
 export async function copyAssets(config: Config) {
-    const { assets } = config;
-    if (!assets.length) return console.log("[PRESSURE] No assets found");
+	const { assets } = config;
+	if (!assets.length) return console.log("[PRESSURE] No assets found");
 
-    for (const file of assets) {
-        await $`${process.platform === "win32" ? "copy" : "cp"} ${file} ${config.dir}`;
-    }
+	for (const file of assets) {
+		await $`${process.platform === "win32" ? "copy" : "cp"} ${file} ${config.dir}`;
+	}
 
-    console.log("[PRESSURE] Assets copied", assets);
+	console.log("[PRESSURE] Assets copied", assets);
 }

@@ -8,6 +8,7 @@ export interface Config {
     html?: string[];
     htmlPath?: string;
     assets?: string[];
+    singleFile?: boolean;
 }
 
 const { values } = parseArgs({
@@ -49,6 +50,10 @@ const { values } = parseArgs({
         workflow: {
             type: "boolean",
             default: false
+        },
+        "single-file": {
+            type: "boolean",
+            default: false
         }
     },
     allowPositionals: true,
@@ -75,7 +80,8 @@ export const config: Config = {
     external: configFile.external || [],
     html: configFile.html || ["public/index.html"],
     htmlPath: values.hp || configFile.htmlPath || "public:dist",
-    assets: configFile.assets || []
+    assets: configFile.assets || [],
+    singleFile: values["single-file"] || configFile.singleFile || false
 }
 
 if (values.entry) config.entryPoints = values.entry.split(",").filter(Boolean);

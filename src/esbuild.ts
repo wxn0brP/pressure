@@ -7,10 +7,11 @@ export async function buildCode(config: Config) {
         entryPoints,
         dir,
         external,
+        singleFile,
     } = config;
     if (!entryPoints.length) return console.log("[PRESSURE] No entryPoints found");
 
-    await esbuild.build({
+    const result = await esbuild.build({
         entryPoints,
         outdir: dir,
         format: "esm",
@@ -18,8 +19,9 @@ export async function buildCode(config: Config) {
         bundle: true,
         sourcemap: true,
         external,
-        splitting: true,
+        splitting: !singleFile,
         minify: process.env.PRESSURE_MINIFY !== "false",
+        metafile: true,
         plugins: [
             stylePlugin({
                 renderOptions: {
@@ -33,4 +35,5 @@ export async function buildCode(config: Config) {
     });
 
     console.log("[PRESSURE] entryPoints built", entryPoints);
+    return result.metafile;
 }

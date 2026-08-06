@@ -13,6 +13,7 @@ Options:
     --hp              HTML output path
     -a, --assets      Assets
     --workflow        Write dir to file for workflow
+    --single-file     Bundle everything into a single HTML file
 `;
 
 console.log(help.trim());

@@ -46,6 +46,11 @@
 				"type": "string"
 			},
 			"default": []
+		},
+		"singleFile": {
+			"type": "boolean",
+			"description": "Bundle everything into a single HTML file with inline JS and CSS",
+			"default": false
 		}
 	},
 	"additionalProperties": false

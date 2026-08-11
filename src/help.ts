@@ -15,6 +15,9 @@ Options:
     --workflow        Write dir to file for workflow
     --single-file     Bundle everything into a single HTML file
     --no-minify       Disable minification
+    --jsx             Enable JSX support with vhtml
+    -g, --gen         Enable built-in gen (true) or path to custom script
+    --banned-files    Files to exclude from gen (comma-separated)
 `;
 
 console.log(help.trim());

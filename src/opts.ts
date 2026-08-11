@@ -10,6 +10,9 @@ export interface Config {
 	assets?: string[];
 	singleFile?: boolean;
 	minify?: boolean;
+	jsx?: boolean;
+	gen?: boolean | string;
+	bannedFiles?: string[];
 }
 
 const { values } = parseArgs({
@@ -60,6 +63,17 @@ const { values } = parseArgs({
 			type: "boolean",
 			default: false,
 		},
+		jsx: {
+			type: "boolean",
+			default: false,
+		},
+		gen: {
+			type: "string",
+			short: "g",
+		},
+		"banned-files": {
+			type: "string",
+		},
 	},
 	allowPositionals: true,
 	allowNegatives: true,
@@ -97,6 +111,18 @@ export const config: Config = {
 		: configFile.minify !== undefined
 			? configFile.minify
 			: true,
+	jsx: values.jsx || configFile.jsx || false,
+	gen: values.gen
+		? values.gen
+		: configFile.gen !== undefined
+			? configFile.gen
+			: false,
+	bannedFiles: values["banned-files"]
+		? values["banned-files"].split(",").filter(Boolean)
+		: configFile.bannedFiles || [
+				"self",
+				"index",
+			],
 };
 
 if (values.entry) config.entryPoints = values.entry.split(",").filter(Boolean);

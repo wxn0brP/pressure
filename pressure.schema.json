@@ -16,7 +16,9 @@
 			"items": {
 				"type": "string"
 			},
-			"default": ["src/index.ts"]
+			"default": [
+				"src/index.ts"
+			]
 		},
 		"external": {
 			"type": "array",
@@ -32,7 +34,9 @@
 			"items": {
 				"type": "string"
 			},
-			"default": ["public/index.html"]
+			"default": [
+				"public/index.html"
+			]
 		},
 		"htmlPath": {
 			"type": "string",
@@ -56,6 +60,34 @@
 			"type": "boolean",
 			"description": "Enable or disable minification of the output",
 			"default": true
+		},
+		"jsx": {
+			"type": "boolean",
+			"description": "Enable JSX support with vhtml",
+			"default": false
+		},
+		"gen": {
+			"description": "Enable built-in module generation (true) or path to a custom script",
+			"oneOf": [
+				{
+					"type": "boolean"
+				},
+				{
+					"type": "string"
+				}
+			],
+			"default": false
+		},
+		"bannedFiles": {
+			"type": "array",
+			"description": "Files to exclude from built-in module generation",
+			"items": {
+				"type": "string"
+			},
+			"default": [
+				"self",
+				"index"
+			]
 		}
 	},
 	"additionalProperties": false

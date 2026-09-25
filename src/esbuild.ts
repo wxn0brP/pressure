@@ -41,7 +41,7 @@ export async function buildCode(config: Config) {
 			"vhtml-shim.js",
 		);
 		buildOptions.jsxFactory = "h";
-		buildOptions.jsxFragment = "h";
+		buildOptions.jsxFragment = "Fragment";
 		buildOptions.inject = [
 			shimPath,
 		];

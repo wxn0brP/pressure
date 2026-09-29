@@ -61,6 +61,11 @@
 			"description": "Enable or disable minification of the output",
 			"default": true
 		},
+		"split": {
+			"type": "boolean",
+			"description": "Enable or disable code splitting",
+			"default": true
+		},
 		"jsx": {
 			"type": "boolean",
 			"description": "Enable JSX support with vhtml",

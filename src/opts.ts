@@ -10,6 +10,7 @@ export interface Config {
 	assets?: string[];
 	singleFile?: boolean;
 	minify?: boolean;
+	split?: boolean;
 	jsx?: boolean;
 	gen?: boolean | string;
 	bannedFiles?: string[];
@@ -63,6 +64,10 @@ const { values } = parseArgs({
 			type: "boolean",
 			default: false,
 		},
+		"no-split": {
+			type: "boolean",
+			default: false,
+		},
 		jsx: {
 			type: "boolean",
 			default: false,
@@ -110,6 +115,11 @@ export const config: Config = {
 		? false
 		: configFile.minify !== undefined
 			? configFile.minify
+			: true,
+	split: values["no-split"]
+		? false
+		: configFile.split !== undefined
+			? configFile.split
 			: true,
 	jsx: values.jsx || configFile.jsx || false,
 	gen: values.gen

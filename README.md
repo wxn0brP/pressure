@@ -70,6 +70,7 @@ Example `pressure.json`:
 | `assets`      | `string[]` | An array of asset directories to copy.              | `[]`                    |
 | `singleFile`  | `boolean`  | Bundle everything into a single HTML file.          | `false`                 |
 | `minify`      | `boolean`  | Enable or disable minification of the output.       | `true`                  |
+| `split`       | `boolean`  | Enable or disable code splitting.                   | `true`                  |
 
 ### Command-Line Arguments
 
@@ -83,6 +84,7 @@ Example `pressure.json`:
 | `--assets <dirs>`   | `-a <dirs>`  | Sets asset directories to copy (comma-separated). |
 | `--single-file`     |              | Bundles everything into a single HTML file.       |
 | `--no-minify`       |              | Disables minification of the output.              |
+| `--no-split`        |              | Disables code splitting.                          |
 | `--help`            | `-h`         | Displays the help message.                        |
 | `--version`         | `-v`         | Displays the version number.                      |
 

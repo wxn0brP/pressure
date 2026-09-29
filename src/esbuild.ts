@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import { Config } from "./opts";
 
 export async function buildCode(config: Config) {
-	const { entryPoints, dir, external, singleFile, minify, jsx } = config;
+	const { entryPoints, dir, external, singleFile, minify, split, jsx } = config;
 	if (!entryPoints.length)
 		return console.log("[PRESSURE] No entryPoints found");
 
@@ -17,7 +17,7 @@ export async function buildCode(config: Config) {
 		bundle: true,
 		sourcemap: true,
 		external,
-		splitting: !singleFile,
+		splitting: !singleFile && (split ?? true),
 		minify,
 		metafile: true,
 		plugins: [

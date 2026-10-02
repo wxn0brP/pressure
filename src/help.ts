@@ -6,6 +6,7 @@ Usage: pressure [options]
 Options:
     -h, --help        Show this help message
     -v, --version     Show version number
+    -f, --config-file Config file
     -d, --dir         Output directory
     -s, --entry       Entry points
     -e, --external    External dependencies

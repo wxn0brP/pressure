@@ -79,6 +79,11 @@ const { values } = parseArgs({
 		"banned-files": {
 			type: "string",
 		},
+		"config-file": {
+			type: "string",
+			short: "f",
+			default: "pressure.json",
+		},
 	},
 	allowPositionals: true,
 	allowNegatives: true,
@@ -96,8 +101,8 @@ if (values.version) {
 
 let configFile: Config = {};
 
-if (existsSync("pressure.json"))
-	configFile = JSON.parse(readFileSync("pressure.json", "utf-8"));
+if (existsSync(values["config-file"]))
+	configFile = JSON.parse(readFileSync(values["config-file"], "utf-8"));
 
 export const config: Config = {
 	dir: values.dir || configFile.dir || "dist",

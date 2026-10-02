@@ -43,12 +43,15 @@ export async function buildHTML(config: Config) {
 
 async function inlineAssets(html: string, dir: string): Promise<string> {
 	html = html.replace(
-		/<script\s+src="([^"]+)"[^>]*><\/script>/g,
-		(match, src) => {
+		/<script\s([^>]*?)src="([^"]+)"([^>]*)><\/script>/g,
+		(match, before, src, after) => {
 			const filePath = `${dir}/${src}`;
 			if (existsSync(filePath)) {
 				const content = readFileSync(filePath, "utf-8");
-				return `<script>${content}</script>`;
+				const attrs = `${before}${after}`;
+				const typeMatch = attrs.match(/type="([^"]+)"/);
+				const typeAttr = typeMatch ? ` type="${typeMatch[1]}"` : "";
+				return `<script${typeAttr}>${content}</script>`;
 			}
 			return match;
 		},

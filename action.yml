@@ -83,7 +83,7 @@ runs:
     - id: upload
       name: Upload
       if: inputs.upload == 'true'
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
         publish_dir: ${{ steps.build.outputs.output-dir }}

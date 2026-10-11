@@ -1,12 +1,15 @@
 import { renderHTML } from "@wxn0brp/falcon-frame";
 import { existsSync, readFileSync, writeFileSync } from "fs";
+import path from "path";
 import { Config } from "./opts";
 
 export async function buildHTML(config: Config) {
-	const { html: files, htmlPath, dir, singleFile } = config;
+	const { html: files, htmlPath, dir, singleFile, vars } = config;
 	if (!files.length) return console.log("[PRESSURE] No HTML files found");
 
-	let FFVar: Record<string, any> = {};
+	const FFVar: Record<string, any> = {
+		...vars,
+	};
 	const [from, to] = htmlPath.split(":");
 
 	const data: Record<string, any> = {};
@@ -21,9 +24,15 @@ export async function buildHTML(config: Config) {
 		Object.assign(data, await import(process.cwd() + "/pressure/html"));
 
 	if (existsSync("pressure/vars.json"))
-		FFVar = JSON.parse(readFileSync("pressure/vars.json", "utf-8"));
+		Object.assign(
+			FFVar,
+			JSON.parse(readFileSync("pressure/vars.json", "utf-8")),
+		);
 
-	for (const file of files) {
+	const layoutPath = FFVar.layout ? path.resolve(FFVar.layout) : null;
+	const filesToProcess = files.filter(f => path.resolve(f) !== layoutPath);
+
+	for (const file of filesToProcess) {
 		let html = renderHTML({
 			templatePath: file,
 			data,
@@ -38,7 +47,8 @@ export async function buildHTML(config: Config) {
 		writeFileSync(path, html);
 	}
 
-	console.log("[PRESSURE] HTML Build Done", files);
+	console.log("[PRESSURE] HTML Build Done");
+	for (const file of filesToProcess) console.log(` - ${file}`);
 }
 
 async function inlineAssets(html: string, dir: string): Promise<string> {

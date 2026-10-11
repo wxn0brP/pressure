@@ -5,7 +5,7 @@ A static site bundler that supports building SCSS, TypeScript, and HTML.
 ## Description
 
 pressure is a tool for bundling static websites with built-in support for preprocessing SCSS,
-compiling TypeScript using esbuild, and generating HTML using the @wxn0brp/falcon-frame framework.
+compiling TypeScript using esbuild, and generating HTML using the @wxn0brp/falcon-frame library.
 It also offers optional JSX support via vhtml and a built-in module generation system.
 
 ## Installation

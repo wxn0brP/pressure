@@ -93,6 +93,12 @@
 				"self",
 				"index"
 			]
+		},
+		"vars": {
+			"type": "object",
+			"description": "Variables passed to FalconFrame renderHTM",
+			"additionalProperties": true,
+			"default": {}
 		}
 	},
 	"additionalProperties": false

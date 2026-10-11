@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
+import { expandGlobs } from "./glob";
 
 export interface Config {
 	external?: string[];
@@ -14,6 +15,7 @@ export interface Config {
 	jsx?: boolean;
 	gen?: boolean | string;
 	bannedFiles?: string[];
+	vars?: Record<string, any>;
 }
 
 const { values } = parseArgs({
@@ -138,7 +140,10 @@ export const config: Config = {
 				"self",
 				"index",
 			],
+	vars: configFile.vars || {},
 };
+
+config.html = expandGlobs(config.html);
 
 if (values.entry) config.entryPoints = values.entry.split(",").filter(Boolean);
 if (values.external)

@@ -24,6 +24,8 @@ Build:
     --no-minify            Disable minification
     --no-split             Disable code splitting
     --jsx                  Enable JSX support with vhtml
+    --define               Define values (KEY=VALUE, comma-separated)
+    --define-file          Script that returns define values at build time
 
 Gen:
     -g, --gen              Enable built-in gen (true) or path to custom script

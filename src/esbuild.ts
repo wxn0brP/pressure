@@ -3,11 +3,14 @@ import stylePlugin from "esbuild-style-plugin";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { Config } from "./opts";
+import { resolveDefines } from "./define";
 
 export async function buildCode(config: Config) {
 	const { entryPoints, dir, external, singleFile, minify, split, jsx } = config;
 	if (!entryPoints.length)
 		return console.log("[PRESSURE] No entryPoints found");
+
+	const define = await resolveDefines(config);
 
 	const buildOptions: esbuild.BuildOptions = {
 		entryPoints,
@@ -20,6 +23,7 @@ export async function buildCode(config: Config) {
 		splitting: !singleFile && (split ?? true),
 		minify,
 		metafile: true,
+		define: define && Object.keys(define).length ? define : undefined,
 		plugins: [
 			stylePlugin({
 				renderOptions: {

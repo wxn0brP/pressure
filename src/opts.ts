@@ -16,6 +16,8 @@ export interface Config {
 	gen?: boolean | string;
 	bannedFiles?: string[];
 	vars?: Record<string, any>;
+	define?: Record<string, string>;
+	defineFile?: string;
 }
 
 const { values } = parseArgs({
@@ -81,6 +83,12 @@ const { values } = parseArgs({
 		"banned-files": {
 			type: "string",
 		},
+		define: {
+			type: "string",
+		},
+		"define-file": {
+			type: "string",
+		},
 		"config-file": {
 			type: "string",
 			short: "f",
@@ -141,7 +149,23 @@ export const config: Config = {
 				"index",
 			],
 	vars: configFile.vars || {},
+	define: {
+		...(configFile.define || {}),
+		...parseDefines(values.define),
+	},
+	defineFile: values["define-file"] || configFile.defineFile,
 };
+
+function parseDefines(raw?: string) {
+	const result: Record<string, string> = {};
+	if (!raw) return result;
+	for (const pair of raw.split(",").filter(Boolean)) {
+		const sep = pair.indexOf("=");
+		if (sep === -1) continue;
+		result[pair.slice(0, sep).trim()] = pair.slice(sep + 1).trim();
+	}
+	return result;
+}
 
 config.html = expandGlobs(config.html);
 

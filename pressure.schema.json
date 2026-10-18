@@ -99,6 +99,18 @@
 			"description": "Variables passed to FalconFrame renderHTM",
 			"additionalProperties": true,
 			"default": {}
+		},
+		"define": {
+			"type": "object",
+			"description": "Replace identifiers with constant values at build time (esbuild define)",
+			"additionalProperties": {
+				"type": "string"
+			},
+			"default": {}
+		},
+		"defineFile": {
+			"type": "string",
+			"description": "Path to a script run at build time that returns define values (object or function, sync or async)"
 		}
 	},
 	"additionalProperties": false

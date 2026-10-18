@@ -79,6 +79,8 @@ Example `pressure.json`:
 | `jsx`         | `boolean`           | Enable JSX support with vhtml.                                 | `false`                 |
 | `gen`         | `boolean \| string` | Enable built-in module generation                              | `false`                 |
 | `bannedFiles` | `string[]`          | Files to exclude from built-in module generation.              | `["self", "index"]`     |
+| `define`      | `Record<string, string>` | Replace identifiers with constant values at build time.   | `{}`                    |
+| `defineFile`  | `string`            | Script run at build time that returns define values.           | `undefined`             |
 
 ### Command-Line Arguments
 

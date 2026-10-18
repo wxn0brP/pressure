@@ -25,7 +25,8 @@ export function generateModules(
 	outFile: string,
 	bannedFiles: string[],
 ) {
-	const files = scanDir(srcDir);
+	const outPath = path.resolve(outFile);
+	const files = scanDir(srcDir).filter(file => path.resolve(file) !== outPath);
 	const imports: string[] = [];
 	const exportEntries: string[] = [];
 
@@ -37,6 +38,7 @@ export function generateModules(
 		const modName = relPath
 			.replace("./", "")
 			.replaceAll("/", "_")
+			.replaceAll("-", "_")
 			.replace(".ts", "");
 
 		imports.push(`import * as ${modName} from "${relPath}";`);

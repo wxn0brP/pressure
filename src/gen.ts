@@ -11,7 +11,7 @@ function scanDir(dir: string, fileList: string[] = []) {
 			scanDir(fullPath, fileList);
 		} else if (
 			entry.isFile() &&
-			fullPath.endsWith(".ts") &&
+			(fullPath.endsWith(".ts") || fullPath.endsWith(".tsx")) &&
 			!fullPath.endsWith(".d.ts")
 		) {
 			fileList.push(fullPath);
@@ -33,13 +33,15 @@ export function generateModules(
 	files.forEach(file => {
 		const relPath =
 			"./" +
-			path.relative(srcDir, file).replace(/\\/g, "/").replace(/\.ts$/, "");
+			path
+				.relative(srcDir, file)
+				.replace(/\\/g, "/")
+				.replace(/\.tsx?$/, "");
 		if (bannedFiles.some(b => relPath.startsWith("./" + b))) return;
 		const modName = relPath
 			.replace("./", "")
 			.replaceAll("/", "_")
-			.replaceAll("-", "_")
-			.replace(".ts", "");
+			.replaceAll("-", "_");
 
 		imports.push(`import * as ${modName} from "${relPath}";`);
 		exportEntries.push(modName);
